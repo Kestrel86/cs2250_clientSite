@@ -1,5 +1,11 @@
 // https://jsonplaceholder.typicode.com/guide/
 
+/*
+posts: https://jsonplaceholder.typicode.com/posts/1 , grabs the title
+users: https://jsonplaceholder.typicode.com/users/1 , grabs the username 
+comments: https://jsonplaceholder.typicode.com/posts/1/comments , grabs the comments to add to readers section
+*/
+
 async function downloadPosts(page = 1) {
   const postsURL = `https://jsonplaceholder.typicode.com/posts?_page=${page}`;
   const response = await fetch(postsURL);
