@@ -31,12 +31,20 @@ async function getUserName(userId) {
 }
 
 // Work from here, the above code is done for us
+// remove everything inside main tag in html
 
 function getArticleId(comments) {
   const article = comments.previousElementSibling;
   const data = article.dataset;
   return data.postId;
 }
+
+const articles = document.getElementsByTagName("article");
+
+// function addArticle() {
+//   const newArt = document.createElement("article");
+//   newArt.attribute("data-post-id");
+// }
 
 const details = document.getElementsByTagName("details");
 for (const detail of details) {
