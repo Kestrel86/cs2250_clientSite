@@ -39,13 +39,6 @@ function getArticleId(comments) {
   return data.postId;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const main = document.querySelector("main");
-  const article = doucment.createElement("article");
-  article.setAttribute("data-post-id", post.id);
-  main.append(article);
-}); //does not work, dammit
-
 const details = document.getElementsByTagName("details");
 for (const detail of details) {
   detail.addEventListener("toggle", async (event) => {
@@ -61,5 +54,48 @@ for (const detail of details) {
   });
 }
 
+// Including the <summary>, <section>, <header>, and <h3> tags, but do not add any <aside>
+
+const main = document.querySelector("main");
+
 const posts = await downloadPosts();
+
 console.log(posts);
+
+for (const post of posts) {
+  const container = document.createElement("article");
+  container.setAttribute("data-post-id", post.id);
+  const heading = document.createElement("h2");
+  const content = document.createElement("p");
+
+  heading.textContent = post.title;
+  content.textContent = post.body;
+
+  container.appendChild(heading);
+  container.appendChild(content);
+
+  main.appendChild(container);
+}
+
+/*
+Desired structure of article
+
+<article>
+   <h2 data-post-id="1">(Title of the post)</h2>
+   <aside><span>(Author name)</span></aside>
+   <p><content)</p>
+</article>
+
+
+<details>
+   <summary>See what our readers had to say...</summary>
+   <section>
+      <header>
+         <h3>Comments</h3>
+      </header>
+      <section>
+         <p>(User comment)</p>
+         <p><small>(theme)</small></p>
+      </section>
+</details>
+*/
