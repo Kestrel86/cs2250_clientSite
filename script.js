@@ -39,12 +39,12 @@ function getArticleId(comments) {
   return data.postId;
 }
 
-const articles = document.getElementsByTagName("article");
-
-// function addArticle() {
-//   const newArt = document.createElement("article");
-//   newArt.attribute("data-post-id");
-// }
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector("main");
+  const article = doucment.createElement("article");
+  article.setAttribute("data-post-id", post.id);
+  main.append(article);
+}); //does not work, dammit
 
 const details = document.getElementsByTagName("details");
 for (const detail of details) {
