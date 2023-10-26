@@ -63,21 +63,31 @@ for (const post of posts) {
   container.appendChild(content);
 
   main.appendChild(container);
-}
 
-const details = document.getElementsByTagName("details");
-for (const detail of details) {
+  const detailContainer = document.createElement("details");
   const summary = document.createElement("summary");
+  summary.innerText = "See what our readers had to say...";
 
   const contSec = document.createElement("section");
 
   const header = document.createElement("header");
   const comments = document.createElement("h3");
+  comments.innerText = "Comments";
 
   const paragraph = document.createElement("p");
   const paragraph2 = document.createElement("p");
   const small = document.createElement("small");
 
+  contSec.appendChild(header);
+  header.appendChild(comments);
+
+  detailContainer.appendChild(summary);
+  detailContainer.appendChild(contSec);
+  main.appendChild(detailContainer);
+}
+
+const details = document.getElementsByTagName("details");
+for (const detail of details) {
   detail.addEventListener("toggle", async (event) => {
     if (detail.open) {
       const asides = detail.getElementsByTagName("aside");
