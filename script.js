@@ -41,10 +41,11 @@ function getArticleId(comments) {
 
 const main = document.querySelector("main");
 
-const posts = await downloadPosts();
+const posts = await downloadPosts(5);
 
 console.log(posts);
 
+//Creates the posts and details button
 for (const post of posts) {
   const container = document.createElement("article");
   container.setAttribute("data-post-id", post.id);
@@ -53,7 +54,7 @@ for (const post of posts) {
   const content = document.createElement("p");
 
   heading.innerText = post.title;
-  user.innerText = "by " + (await getUserName(post.id));
+  user.innerText = "by " + (await getUserName(post.userId));
   content.innerText = post.body;
 
   content.innerText.replaceAll("\n", `<br/>`);
@@ -74,10 +75,6 @@ for (const post of posts) {
   const comments = document.createElement("h3");
   comments.innerText = "Comments";
 
-  const paragraph = document.createElement("p");
-  const paragraph2 = document.createElement("p");
-  const small = document.createElement("small");
-
   contSec.appendChild(header);
   header.appendChild(comments);
 
@@ -96,25 +93,20 @@ for (const detail of details) {
         const articleId = getArticleId(detail);
         const comments = await downloadComments(articleId);
         console.log(comments);
+
+        //created to post every comment
+        for (const comment of comments) {
+          const container = document.createElement("aside");
+          const content = document.createElement("p");
+          const contentSmall = document.createElement("p");
+          content.innerText = comment.body;
+          content.innerText.replaceAll("\n", `<br/>`);
+          contentSmall.innerHTML = `<small>${comment.name}</small>`;
+          container.appendChild(content);
+          container.appendChild(contentSmall);
+          detail.lastChild.appendChild(container);
+        }
       }
     }
   });
 }
-
-// Including the <summary>, <section>, <header>, and <h3> tags, but do not add any <aside>
-
-/*
-Desired structure of article
-
-<details>
-   <summary>See what our readers had to say...</summary>
-   <section>
-      <header>
-         <h3>Comments</h3>
-      </header>
-      <section>
-         <p>(User comment)</p>
-         <p><small>(theme)</small></p>
-      </section>
-</details>
-*/
