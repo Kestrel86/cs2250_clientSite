@@ -39,8 +39,45 @@ function getArticleId(comments) {
   return data.postId;
 }
 
+const main = document.querySelector("main");
+
+const posts = await downloadPosts();
+
+console.log(posts);
+
+for (const post of posts) {
+  const container = document.createElement("article");
+  container.setAttribute("data-post-id", post.id);
+  const heading = document.createElement("h2");
+  const user = document.createElement("aside");
+  const content = document.createElement("p");
+
+  heading.innerText = post.title;
+  user.innerText = "by " + (await getUserName(post.id));
+  content.innerText = post.body;
+
+  content.innerText.replaceAll("\n", `<br/>`);
+
+  container.appendChild(heading);
+  container.appendChild(user);
+  container.appendChild(content);
+
+  main.appendChild(container);
+}
+
 const details = document.getElementsByTagName("details");
 for (const detail of details) {
+  const summary = document.createElement("summary");
+
+  const contSec = document.createElement("section");
+
+  const header = document.createElement("header");
+  const comments = document.createElement("h3");
+
+  const paragraph = document.createElement("p");
+  const paragraph2 = document.createElement("p");
+  const small = document.createElement("small");
+
   detail.addEventListener("toggle", async (event) => {
     if (detail.open) {
       const asides = detail.getElementsByTagName("aside");
@@ -56,36 +93,8 @@ for (const detail of details) {
 
 // Including the <summary>, <section>, <header>, and <h3> tags, but do not add any <aside>
 
-const main = document.querySelector("main");
-
-const posts = await downloadPosts();
-
-console.log(posts);
-
-for (const post of posts) {
-  const container = document.createElement("article");
-  container.setAttribute("data-post-id", post.id);
-  const heading = document.createElement("h2");
-  const content = document.createElement("p");
-
-  heading.textContent = post.title;
-  content.textContent = post.body;
-
-  container.appendChild(heading);
-  container.appendChild(content);
-
-  main.appendChild(container);
-}
-
 /*
 Desired structure of article
-
-<article>
-   <h2 data-post-id="1">(Title of the post)</h2>
-   <aside><span>(Author name)</span></aside>
-   <p><content)</p>
-</article>
-
 
 <details>
    <summary>See what our readers had to say...</summary>
