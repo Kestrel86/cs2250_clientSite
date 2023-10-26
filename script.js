@@ -42,14 +42,16 @@ for (const post of posts) {
   container.setAttribute("data-post-id", post.id);
   const heading = document.createElement("h2");
   const user = document.createElement("aside");
+  const span = document.createElement("span");
   const content = document.createElement("p");
 
   heading.innerText = post.title;
-  user.innerText = "by " + (await getUserName(post.userId));
+  span.innerText = "by " + (await getUserName(post.userId));
   content.innerText = post.body;
 
   content.innerText.replaceAll("\n", `<br/>`);
 
+  user.appendChild(span);
   container.appendChild(heading);
   container.appendChild(user);
   container.appendChild(content);
