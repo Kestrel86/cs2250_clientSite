@@ -41,7 +41,7 @@ function getArticleId(comments) {
 
 const main = document.querySelector("main");
 
-const posts = await downloadPosts(5);
+const posts = await downloadPosts();
 
 console.log(posts);
 
