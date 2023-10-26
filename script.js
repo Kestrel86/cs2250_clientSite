@@ -1,11 +1,5 @@
 // https://jsonplaceholder.typicode.com/guide/
 
-/*
-posts: https://jsonplaceholder.typicode.com/posts/1 , grabs the title
-users: https://jsonplaceholder.typicode.com/users/1 , grabs the username 
-comments: https://jsonplaceholder.typicode.com/posts/1/comments , grabs the comments to add to readers section
-*/
-
 // 10 posts, 5 comments each
 // try to dynamically add the article elements
 
@@ -29,9 +23,6 @@ async function getUserName(userId) {
   const user = await response.json();
   return user.name;
 }
-
-// Work from here, the above code is done for us
-// remove everything inside main tag in html
 
 function getArticleId(comments) {
   const article = comments.previousElementSibling;
